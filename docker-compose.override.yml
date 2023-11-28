@@ -1,0 +1,20 @@
+version: '3.9'
+
+services:
+  node:
+    build:
+      context: .
+      dockerfile: ./docker/dev.Dockerfile
+    tty: true
+    volumes:
+      - .:/home/node/app
+    networks:
+      - default
+      - traefik-gateway
+    labels:
+      - 'traefik.enable=true'
+      - 'traefik.docker.network=traefik-gateway'
+      - 'traefik.http.routers.skilltree-react.rule=Host(`skilltree-react.localhost`)'
+      - 'traefik.http.routers.skilltree-react.entrypoints=https'
+      - 'traefik.http.routers.skilltree-react.tls=true'
+      - 'traefik.http.services.skilltree-react.loadbalancer.server.port=80'
