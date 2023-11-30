@@ -27,6 +27,8 @@ const elkOptions = {
     'elk.algorithm': 'layered',
     'elk.layered.spacing.nodeNodeBetweenLayers': '100',
     'elk.spacing.nodeNode': '80',
+    'elk.layered.nodePlacement.horizontalAlignment': 'MEDIAN',
+    'elk.layered.nodePlacement.verticalAlignment': 'MEDIAN',
 };
 
 const getLayoutedElements = (nodes, edges, options = {}) => {

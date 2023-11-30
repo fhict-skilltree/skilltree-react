@@ -128,85 +128,15 @@ async function getSkilltree() {
             title: 'Vue Word',
             parent_skill_id: 9,
         },
-    ]
-}
-
-async function getSkilltree2() {
-    return [
         {
-            id: 1,
-            title: 'Semester 2',
-            parent_id: null,
-            children: [
-                {
-                    id: 2,
-                    title: 'Software Programming',
-                    parent_id: 1,
-                    children: [
-                        {
-                            id: 3,
-                            title: 'Html Word',
-                            children: [],
-                        },
-                        {
-                            id: 4,
-                            title: 'Flex Word',
-                            children: [],
-                        },
-                        {
-                            id: 5,
-                            title: 'Spacious Word',
-                            children: [],
-                        },
-                    ],
-                },
-                {
-                    id: 6,
-                    title: 'Another Word',
-                    parent_id: 1,
-                    children: [
-                        {
-                            id: 7,
-                            title: 'CSS Word',
-                            children: [
-                                {
-                                    id: 8,
-                                    title: 'PHP Word',
-                                    children: [],
-                                },
-                                {
-                                    id: 9,
-                                    title: 'Node Word',
-                                    children: [],
-                                },
-                            ],
-                        }
-                    ],
-                },
-                {
-                    title: 'Hello Word',
-                    id: 10,
-                    parent_id: 1,
-                    children: [
-                        {
-                            id: 11,
-                            title: 'Sans Word',
-                            children: [
-                                {
-                                    id: 12,
-                                    title: 'JSX Word',
-                                    children: [],
-                                },
-                                {
-                                    id: 13,
-                                    title: 'Vue Word',
-                                    children: [],
-                                },
-                            ],
-                        }
-                    ],
-                },
-            ],
-        }
+            id: 14,
+            title: 'Semester 3',
+            parent_skill_id: null,
+        },
+        {
+            id: 15,
+            title: 'Java',
+            parent_skill_id: 14,
+        },
     ]
 }
