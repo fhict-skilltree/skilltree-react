@@ -1,7 +1,7 @@
 'use client'
 
 import ELK from 'elkjs/lib/elk.bundled.js';
-import React, {useCallback, useLayoutEffect} from 'react';
+import React, {useCallback, useLayoutEffect, useMemo} from 'react';
 import ReactFlow, {
     ReactFlowProvider,
     addEdge,
@@ -10,8 +10,10 @@ import ReactFlow, {
     useEdgesState,
     useReactFlow,
 } from 'reactflow';
-
 import 'reactflow/dist/style.css';
+import RootSkill from '@/components/SkilltreeFlowBuilder/Nodes/RootSkill'
+import SubSkill from "@/components/SkilltreeFlowBuilder/Nodes/SubSkill";
+import LeafSkill from "@/components/SkilltreeFlowBuilder/Nodes/LeafSkill";
 
 
 const elk = new ELK();
@@ -40,7 +42,7 @@ const getLayoutedElements = (nodes, edges, options = {}) => {
             sourcePosition: isHorizontal ? 'right' : 'bottom',
 
             // Hardcode a width and height for elk to use when layouting.
-            width: 150,
+            width: 200,
             height: 50,
         })),
         edges: edges,
@@ -88,8 +90,15 @@ function LayoutFlow({initialNodes, initialEdges}) {
         onLayout({direction: 'UP', useInitialNodes: true});
     }, []);
 
+    const nodeTypes = useMemo(() => ({
+        rootSkill: RootSkill,
+        subSkill: SubSkill,
+        leafSkill: LeafSkill,
+    }), [])
+
     return (
         <ReactFlow
+            nodeTypes={nodeTypes}
             nodes={nodes}
             edges={edges}
             onConnect={onConnect}
