@@ -5,7 +5,7 @@ function copyEnvironmentFileIfMissing() {
     then
         ENVIRONMENT_FILE=".env.example";
         echo "==[ Copying $ENVIRONMENT_FILE to .env"
-        cp $ENVIRONMENT_FILE .env
+        cp $ENVIRONMENT_FILE .env.local
     fi
 }
 
