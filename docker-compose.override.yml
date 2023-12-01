@@ -14,7 +14,7 @@ services:
     labels:
       - 'traefik.enable=true'
       - 'traefik.docker.network=traefik-gateway'
-      - 'traefik.http.routers.skilltree-react.rule=Host(`skilltree-react.localhost`)'
+      - 'traefik.http.routers.skilltree-react.rule=Host(`talentpulse.localhost`)'
       - 'traefik.http.routers.skilltree-react.entrypoints=https'
       - 'traefik.http.routers.skilltree-react.tls=true'
-      - 'traefik.http.services.skilltree-react.loadbalancer.server.port=80'
+      - 'traefik.http.services.skilltree-react.loadbalancer.server.port=3000'

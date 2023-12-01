@@ -21,4 +21,4 @@ echo "==[ DOCKER INIT ]==";
 docker compose up -d --remove-orphans
 
 runScriptInDockerContainer pnpm install
-runScriptInDockerContainer pnpm run dev -p 80
+runScriptInDockerContainer pnpm run dev
