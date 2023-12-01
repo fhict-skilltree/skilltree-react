@@ -1,7 +1,7 @@
 'use client'
 
 import ELK from 'elkjs/lib/elk.bundled.js';
-import React, {useCallback, useLayoutEffect, useMemo} from 'react';
+import React, {useCallback, useLayoutEffect, useMemo, useState} from 'react';
 import ReactFlow, {
     ReactFlowProvider,
     addEdge,
@@ -9,8 +9,10 @@ import ReactFlow, {
     useNodesState,
     useEdgesState,
     useReactFlow,
+    MarkerType,
 } from 'reactflow';
 import 'reactflow/dist/style.css';
+import {Button, Modal} from 'flowbite-react';
 import RootSkill from '@/components/SkilltreeFlowBuilder/Nodes/RootSkill'
 import SubSkill from "@/components/SkilltreeFlowBuilder/Nodes/SubSkill";
 import LeafSkill from "@/components/SkilltreeFlowBuilder/Nodes/LeafSkill";
@@ -65,6 +67,49 @@ const getLayoutedElements = (nodes, edges, options = {}) => {
         .catch(console.error);
 };
 
+
+function mapSkillsToNodes(skills) {
+    const position = {x: 0, y: 0};
+
+    return skills.map((skill) => {
+        const skillHasChildren = skills.filter(searchedSkill => searchedSkill.parent_skill_id === skill.id).length > 0
+
+        const nodeType = skill.parent_skill_id === null
+            ? 'rootSkill'
+            : skillHasChildren
+                ? 'subSkill'
+                : 'leafSkill'
+
+        return {
+            id: `${skill.id}`,
+            type: nodeType,
+            data: {
+                label: skill.title,
+            },
+            position,
+            draggable: false,
+        }
+    })
+}
+
+function mapSkillsToEdges(skills) {
+    return skills
+        .filter((skill): boolean => skill.parent_skill_id !== null)
+        .map((skill) => {
+            return {
+                id: `${skill.parent_skill_id}-${skill.id}`,
+                source: `${skill.parent_skill_id}`,
+                target: `${skill.id}`,
+                markerEnd: {
+                    type: MarkerType.ArrowClosed,
+                    width: 20,
+                    height: 20,
+                    // color: '#FF0072',
+                },
+            }
+        })
+}
+
 function LayoutFlow({initialNodes, initialEdges}) {
     const [nodes, setNodes, onNodesChange] = useNodesState([]);
     const [edges, setEdges, onEdgesChange] = useEdgesState([]);
@@ -107,6 +152,7 @@ function LayoutFlow({initialNodes, initialEdges}) {
             onNodesChange={onNodesChange}
             onEdgesChange={onEdgesChange}
             fitView
+            attributionPosition={"bottom-left"}
         >
             <Controls
                 showInteractive={false}
@@ -116,14 +162,45 @@ function LayoutFlow({initialNodes, initialEdges}) {
     );
 }
 
-export default function SkilltreeFlow({initialNodes, initialEdges}) {
+export default function SkilltreeFlow({skills}) {
+    const initialNodes = mapSkillsToNodes(skills)
+    const initialEdges = mapSkillsToEdges(skills)
+
+    const [openModal, setOpenModal] = useState(false);
+
+
     return (
         <ReactFlowProvider>
             <LayoutFlow
                 initialNodes={initialNodes}
                 initialEdges={initialEdges}
+                // onSkillHandler
             >
             </LayoutFlow>
+
+            <Button onClick={() => setOpenModal(true)}>Test modal</Button>
+            <Modal show={openModal} onClose={() => setOpenModal(false)} dismissible size="4xl">
+                <Modal.Header>HTML & CSS</Modal.Header>
+
+                <Modal.Body>
+                    <div className="space-y-6">
+                        <h2 className={"text-xl text-gray-800"}>Omschrijving</h2>
+                        <p className="text-base leading-relaxed text-gray-500">
+                            In dit overzicht vind je de skilltree voor je huidige opleiding. Dit is een tool waarin de
+                            voortgang van je semester in bijgehouden kan worden. In het overzicht vind je een
+                            totaalbeeld van de mogelijke vaardigheden die je in dit semester kunt leren. De skilltree
+                            doorloop je vanaf boven naar bedenden. Om een vaardigheid af te tekenen, moet je voldoende
+                            bewijs aanleveren. Klik op een vaardigheid voor meer informatie.
+                        </p>
+                    </div>
+                </Modal.Body>
+
+                <Modal.Footer>
+                    <Button color="gray" onClick={() => setOpenModal(false)}>
+                        Sluiten
+                    </Button>
+                </Modal.Footer>
+            </Modal>
         </ReactFlowProvider>
     );
 }

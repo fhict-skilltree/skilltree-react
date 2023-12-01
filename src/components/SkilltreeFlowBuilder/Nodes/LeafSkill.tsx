@@ -12,6 +12,8 @@ export default function LeafSkill({ data }) {
             <Handle
                 type="target"
                 position={Position.Bottom}
+                className={"invisible"}
+                isConnectable={false}
             />
         </>
     );

@@ -1,60 +1,45 @@
 import SkilltreeFlow from "@/components/SkilltreeFlowBuilder/SkilltreeFlow";
+import {Button, Card, Modal } from 'flowbite-react';
 
-function mapSkillsToNodes(skills) {
-    const position = {x: 0, y: 0};
-
-    return skills.map((skill) => {
-        const skillHasChildren = skills.filter(searchedSkill => searchedSkill.parent_skill_id === skill.id).length > 0
-
-        const nodeType = skill.parent_skill_id === null
-            ? 'rootSkill'
-            : skillHasChildren
-            ? 'subSkill'
-                : 'leafSkill'
-
-        return {
-            id: `${skill.id}`,
-            type: nodeType,
-            data: {
-                label: skill.title,
-            },
-            position,
-            markerEnd: {
-                // type: MarkerType.ArrowClosed,
-                width: 20,
-                height: 20,
-                color: '#FF0072',
-            },
-        }
-    })
-}
-
-function mapSkillsToEdges(skills) {
-    return skills
-        .filter((skill): boolean => skill.parent_skill_id !== null)
-        .map((skill) => {
-            return {
-                id: `${skill.parent_skill_id}-${skill.id}`,
-                source: `${skill.parent_skill_id}`,
-                target: `${skill.id}`,
-            }
-        })
-}
 
 export default async function SkilltreeTest({}) {
     const skills = await getSkilltree()
 
-    const nodes = mapSkillsToNodes(skills)
-    const edges = mapSkillsToEdges(skills)
-
     return (
         <main>
-            <div className={"container mx-auto"}>
-                <div className={"border-4 border-blue-600"} style={{height: '800px'}}>
-                    <SkilltreeFlow
-                        initialNodes={nodes}
-                        initialEdges={edges}/>
-                </div>
+            <div className="max-w-screen-xl mx-auto">
+                <Card className={"mt-5"}>
+                    <div className="grid grid-cols-12">
+                        <div className={"col-span-8"}>
+                            <h5 className="text-3xl font-semibold tracking-tight text-gray-900 dark:text-white">
+                                Semester 2 <span></span>
+                            </h5>
+
+                            <p className={"mt-2"}>
+                                In dit overzicht vind je de skilltree voor je huidige opleiding. In de skilltree vind je een
+                                selectie aan vaardigheden die je in dit semester kunt gaan aantonen. De skilltree doorloop je
+                                vanaf boven naar bedenden. Het is de bedoeling dat je zelf een keuze maakt aan welke
+                                vaardigheden jij wilt werken. Wanneer je denk dat je een vaardigheid voldoende hebt aangetoond,
+                                kun je dit voor jezelf afvinken. De docent zal in jouw periodieke beoordelingen vaststellen op
+                                welk niveau jij de leeruitkomsten aantoond.
+                            </p>
+                        </div>
+
+                        <div>
+
+                        </div>
+                    </div>
+                </Card>
+
+                <Card className={"mt-5"}>
+                    <h5 className="text-xl font-semibold tracking-tight text-gray-900 dark:text-white">
+                        Skilltree
+                    </h5>
+
+                    <div style={{height: '800px'}}>
+                        <SkilltreeFlow skills={skills}/>
+                    </div>
+                </Card>
             </div>
         </main>
     )
