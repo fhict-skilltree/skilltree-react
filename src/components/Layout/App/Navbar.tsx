@@ -5,8 +5,8 @@ import cyrildewitLogo from '@/assets/16477999.png'
 
 export default function Navbar() {
     return (
-        <FlowbiteNavbar fluid rounded className={"shadow"}>
-            <FlowbiteNavbar.Brand href="https://flowbite-react.com">
+        <FlowbiteNavbar fluid rounded className={""}>
+            <FlowbiteNavbar.Brand href="/">
                 <span className="self-center whitespace-nowrap text-xl font-semibold dark:text-white">SkillFlow</span>
             </FlowbiteNavbar.Brand>
 
