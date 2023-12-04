@@ -7,7 +7,7 @@ export default function Navbar() {
     return (
         <FlowbiteNavbar fluid rounded className={""}>
             <FlowbiteNavbar.Brand href="/">
-                <span className="self-center whitespace-nowrap text-xl font-semibold dark:text-white">SkillFlow</span>
+                <span className="self-center whitespace-nowrap text-xl font-semibold dark:text-white">TalentPulse</span>
             </FlowbiteNavbar.Brand>
 
             <div className="flex md:order-2">
