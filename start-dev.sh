@@ -1,7 +1,7 @@
 #!/bin/bash
 
 function copyEnvironmentFileIfMissing() {
-    if ! [ -f ".env" ];
+    if ! [ -f ".env.local" ];
     then
         ENVIRONMENT_FILE=".env.example";
         echo "==[ Copying $ENVIRONMENT_FILE to .env"
