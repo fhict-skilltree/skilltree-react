@@ -5,8 +5,8 @@ import cyrildewitLogo from '@/assets/16477999.png'
 
 export default function Navbar() {
     return (
-        <FlowbiteNavbar fluid rounded className={""}>
-            <FlowbiteNavbar.Brand href="/">
+        <FlowbiteNavbar fluid rounded>
+            <FlowbiteNavbar.Brand href="/app">
                 <span className="self-center whitespace-nowrap text-xl font-semibold dark:text-white">TalentPulse</span>
             </FlowbiteNavbar.Brand>
 

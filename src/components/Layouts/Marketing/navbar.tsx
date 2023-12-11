@@ -19,11 +19,11 @@ export default function Navbar() {
                     <FlowbiteNavbar.Toggle/>
                 </div>
 
-                <FlowbiteNavbar.Collapse>
-                    <FlowbiteNavbar.Link href="/" active>
-                        Home
-                    </FlowbiteNavbar.Link>
-                </FlowbiteNavbar.Collapse>
+                {/*<FlowbiteNavbar.Collapse>*/}
+                {/*    <FlowbiteNavbar.Link href="/" active>*/}
+                {/*        Home*/}
+                {/*    </FlowbiteNavbar.Link>*/}
+                {/*</FlowbiteNavbar.Collapse>*/}
             </FlowbiteNavbar>
         </header>
     )
