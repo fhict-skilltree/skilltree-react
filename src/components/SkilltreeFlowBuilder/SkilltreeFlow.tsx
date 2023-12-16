@@ -72,19 +72,20 @@ function mapSkillsToNodes(skills) {
     const position = {x: 0, y: 0};
 
     return skills.map((skill) => {
-        const skillHasChildren = skills.filter(searchedSkill => searchedSkill.parent_skill_id === skill.id).length > 0
+        const skillHasChildren = skills.filter(searchedSkill => searchedSkill.parent_skill_uuid === skill.uuid).length > 0
 
-        const nodeType = skill.parent_skill_id === null
+        const nodeType = skill.parent_skill_uuid === null
             ? 'rootSkill'
             : skillHasChildren
                 ? 'subSkill'
                 : 'leafSkill'
 
         return {
-            id: `${skill.id}`,
+            id: skill.uuid,
             type: nodeType,
             data: {
                 label: skill.title,
+                uuid: skill.uuid,
             },
             position,
             draggable: false,
@@ -94,12 +95,12 @@ function mapSkillsToNodes(skills) {
 
 function mapSkillsToEdges(skills) {
     return skills
-        .filter((skill): boolean => skill.parent_skill_id !== null)
+        .filter((skill): boolean => skill.parent_skill_uuid !== null)
         .map((skill) => {
             return {
-                id: `${skill.parent_skill_id}-${skill.id}`,
-                source: `${skill.parent_skill_id}`,
-                target: `${skill.id}`,
+                id: `${skill.parent_skill_uuid}-${skill.uuid}`,
+                source: `${skill.parent_skill_uuid}`,
+                target: `${skill.uuid}`,
                 markerEnd: {
                     type: MarkerType.ArrowClosed,
                     width: 20,
