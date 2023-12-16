@@ -3,6 +3,7 @@ import {Inter} from 'next/font/google'
 import '@/app/globals.css'
 import Layout from '@/components/Layouts/App/Index'
 import {auth} from '@/app/api/auth/[...nextauth]/route'
+import classNames from "classnames";
 
 const inter = Inter({subsets: ['latin']})
 
@@ -19,7 +20,7 @@ export default async function RootLayout({
 
     return (
         <html lang="nl">
-        <body className={inter.className}>
+        <body className={classNames(inter.className, 'bg-slate-100')}>
 
         <Layout user={session.user}>
             {children}

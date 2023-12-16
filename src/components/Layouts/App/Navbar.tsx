@@ -2,11 +2,12 @@
 
 import { Avatar, Dropdown, Navbar as FlowbiteNavbar } from 'flowbite-react';
 import { signOut } from "next-auth/react"
+import classNames from "classnames";
 
 
 export default function Navbar({ user }) {
     return (
-        <FlowbiteNavbar fluid rounded>
+        <FlowbiteNavbar fluid rounded className={classNames('shadow-sm')}>
             <FlowbiteNavbar.Brand href="/app">
                 <span className="self-center whitespace-nowrap text-xl font-semibold dark:text-white">TalentPulse</span>
             </FlowbiteNavbar.Brand>
@@ -30,8 +31,11 @@ export default function Navbar({ user }) {
                 <FlowbiteNavbar.Toggle />
             </div>
             <FlowbiteNavbar.Collapse>
-                <FlowbiteNavbar.Link href="#" active>
+                <FlowbiteNavbar.Link href="/app" active>
                     Dashboard
+                </FlowbiteNavbar.Link>
+                <FlowbiteNavbar.Link href="/app/courses" active>
+                    Cursussen
                 </FlowbiteNavbar.Link>
             </FlowbiteNavbar.Collapse>
         </FlowbiteNavbar>
