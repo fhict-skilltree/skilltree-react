@@ -24,10 +24,6 @@ export default async function SkilltreeTest({ params }) {
                                 { course.content }
                             </p>
                         </div>
-
-                        <div>
-
-                        </div>
                     </div>
                 </Card>
 
