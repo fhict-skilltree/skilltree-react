@@ -2,6 +2,7 @@
 
 import { Button, Navbar as FlowbiteNavbar} from 'flowbite-react';
 import Link from 'next/link';
+import { signIn } from "next-auth/react"
 
 export default function Navbar() {
     return (
@@ -15,15 +16,16 @@ export default function Navbar() {
                 </FlowbiteNavbar.Brand>
 
                 <div className="flex md:order-2">
-                    <Button as={Link} href={"/login"}>Inloggen</Button>
+                    <Button onClick={() => signIn(undefined, { callbackUrl: '/app/dashboard' })}>Inloggen</Button>
+                    {/*<Button as={Link} href={"/api/auth/signin"}>Inloggen</Button>*/}
                     <FlowbiteNavbar.Toggle/>
                 </div>
 
-                <FlowbiteNavbar.Collapse>
-                    <FlowbiteNavbar.Link href="/" active>
-                        Home
-                    </FlowbiteNavbar.Link>
-                </FlowbiteNavbar.Collapse>
+                {/*<FlowbiteNavbar.Collapse>*/}
+                {/*    <FlowbiteNavbar.Link href="/" active>*/}
+                {/*        Home*/}
+                {/*    </FlowbiteNavbar.Link>*/}
+                {/*</FlowbiteNavbar.Collapse>*/}
             </FlowbiteNavbar>
         </header>
     )

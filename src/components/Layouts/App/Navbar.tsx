@@ -1,12 +1,13 @@
 'use client'
 
 import { Avatar, Dropdown, Navbar as FlowbiteNavbar } from 'flowbite-react';
-import cyrildewitLogo from '@/assets/16477999.png'
+import { signOut } from "next-auth/react"
 
-export default function Navbar() {
+
+export default function Navbar({ user }) {
     return (
-        <FlowbiteNavbar fluid rounded className={""}>
-            <FlowbiteNavbar.Brand href="/">
+        <FlowbiteNavbar fluid rounded>
+            <FlowbiteNavbar.Brand href="/app">
                 <span className="self-center whitespace-nowrap text-xl font-semibold dark:text-white">TalentPulse</span>
             </FlowbiteNavbar.Brand>
 
@@ -19,12 +20,12 @@ export default function Navbar() {
                     }
                 >
                     <Dropdown.Header>
-                        <span className="block text-sm">Cyril de Wit</span>
+                        <span className="block text-sm">{ user.name }</span>
                         <span className="block truncate text-sm font-medium">Fontys Hogeschool</span>
                     </Dropdown.Header>
                     {/*<Dropdown.Item>Settings</Dropdown.Item>*/}
                     {/*<Dropdown.Divider />*/}
-                    <Dropdown.Item>Uitloggen</Dropdown.Item>
+                    <Dropdown.Item onClick={() => signOut({ callbackUrl: '/' })}>Uitloggen</Dropdown.Item>
                 </Dropdown>
                 <FlowbiteNavbar.Toggle />
             </div>
