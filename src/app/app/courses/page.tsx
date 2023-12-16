@@ -8,7 +8,7 @@ export default async function Page({}) {
         <div className={'container mx-auto'}>
             <div className={'grid gap-4 md:grid-cols-2'}>
                 {courses.map((course) =>
-                    <Card href={`/app/courses/${course.uuid}`} key={course.uuid}>
+                    <Card href={`/app/courses/${course.uuid}`} key={course.uuid} className={'mt-5'}>
                         <h5 className="text-2xl font-bold tracking-tight text-gray-900 dark:text-white">
                             { course.title }
                         </h5>

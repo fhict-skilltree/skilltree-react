@@ -11,7 +11,6 @@ export class SkillRepository {
 
         const response = await api.get(`skilltrees/1`, config)
 
-        console.log('test')
         return response?.data?.data
     }
 

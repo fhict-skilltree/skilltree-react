@@ -1,5 +1,5 @@
 import SkilltreeFlow from "@/components/SkilltreeFlowBuilder/SkilltreeFlow";
-import {Button, Card, Modal } from 'flowbite-react';
+import { Card } from 'flowbite-react';
 import {CourseRepository} from "@/api/repositories/course-repository";
 import {SkillRepository} from "@/api/repositories/skill-repository";
 
@@ -12,7 +12,7 @@ export default async function SkilltreeTest({ params }) {
 
     return (
         <main>
-            <div className="max-w-screen-xl mx-auto">
+            <div className="container mx-auto">
                 <Card className={"mt-5"}>
                     <div className="grid grid-cols-12">
                         <div className={"col-span-8"}>
