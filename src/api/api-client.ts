@@ -1,5 +1,8 @@
+'use server'
+
 import axios, { AxiosResponse } from 'axios'
 import {auth} from '@/app/api/auth/[...nextauth]/route'
+import {redirect} from "next/navigation";
 
 export const getBearerToken = async () => {
     const session = await auth()
@@ -16,10 +19,20 @@ export const getAuthenticatedUserUuid = async () => {
 
 const api = axios.create({
     baseURL: process.env.BACKEND_API_URL,
-    // headers: {
-    //     'Authorization': await getBearerToken(),
-    // },
+    headers: {
+        'Content-Type': 'application/json',
+        'Accept': 'application/json',
+    },
 })
-api.defaults.headers.common['Content-Type'] = 'application/json'
+
+const onReject = async (err: any) => {
+    if (err.response?.status === 401) {
+        redirect('/api/auth/signin')
+    }
+
+    return Promise.reject(err)
+}
+
+api.interceptors.response.use((res) => res, onReject)
 
 export { api }
