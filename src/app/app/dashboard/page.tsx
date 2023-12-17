@@ -1,8 +1,8 @@
 import {redirect} from 'next/navigation'
-import {CourseRepository} from "@/api/repositories/course-repository";
+import {getUserEnrolledCourses} from "@/api/repositories/course-repository";
 
 export default async function Dashboard({}) {
-    const courses = await CourseRepository.getUserEnrolledCourses()
+    const courses = await getUserEnrolledCourses()
     const latestEnrolledCourseUuid = courses[0].uuid
 
     redirect(`/app/courses/${latestEnrolledCourseUuid}`)

@@ -1,14 +1,19 @@
 import SkilltreeFlow from "@/components/SkilltreeFlowBuilder/SkilltreeFlow";
-import { Card } from 'flowbite-react';
-import {CourseRepository} from "@/api/repositories/course-repository";
-import {SkillRepository} from "@/api/repositories/skill-repository";
+import {Card} from 'flowbite-react';
+import {findByUuid} from "@/api/repositories/course-repository";
+import {getSkilltree, getSkill} from "@/api/repositories/skill-repository";
+import React from "react";
+import SelectedSkillModal from "@/app/app/courses/[uuid]/selected-skill-modal";
 
-export default async function SkilltreeTest({ params }) {
-    const course = await CourseRepository.findByUuid({
+export default async function SkilltreeTest({ params, searchParams }) {
+    const course = await findByUuid({
         courseUuid: params.uuid,
     })
-
-    const skills = await SkillRepository.getSkilltree()
+    const skills = await getSkilltree()
+    const selectedSkillUuid = searchParams?.selectedSkillUuid
+    const currentSelectedSkill = selectedSkillUuid
+        ? await getSkill(selectedSkillUuid)
+        : null;
 
     return (
         <main>
@@ -37,6 +42,8 @@ export default async function SkilltreeTest({ params }) {
                     </div>
                 </Card>
             </div>
+
+            <SelectedSkillModal skill={currentSelectedSkill} />
         </main>
     )
 }

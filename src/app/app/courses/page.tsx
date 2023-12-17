@@ -1,8 +1,8 @@
-import {CourseRepository} from "@/api/repositories/course-repository";
+import {getUserEnrolledCourses} from "@/api/repositories/course-repository";
 import {Button, Card} from "flowbite-react";
 
 export default async function Page({}) {
-    const courses = await CourseRepository.getUserEnrolledCourses()
+    const courses = await getUserEnrolledCourses()
 
     return (
         <div className={'container mx-auto'}>

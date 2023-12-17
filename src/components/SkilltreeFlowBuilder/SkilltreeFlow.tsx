@@ -1,7 +1,7 @@
 'use client'
 
 import ELK from 'elkjs/lib/elk.bundled.js';
-import React, {useCallback, useLayoutEffect, useMemo, useState} from 'react';
+import React, {useCallback, useLayoutEffect, useMemo} from 'react';
 import ReactFlow, {
     ReactFlowProvider,
     addEdge,
@@ -12,7 +12,6 @@ import ReactFlow, {
     MarkerType,
 } from 'reactflow';
 import 'reactflow/dist/style.css';
-import {Button, Modal} from 'flowbite-react';
 import RootSkill from '@/components/SkilltreeFlowBuilder/Nodes/RootSkill'
 import SubSkill from "@/components/SkilltreeFlowBuilder/Nodes/SubSkill";
 import LeafSkill from "@/components/SkilltreeFlowBuilder/Nodes/LeafSkill";
@@ -167,9 +166,6 @@ export default function SkilltreeFlow({skills}) {
     const initialNodes = mapSkillsToNodes(skills)
     const initialEdges = mapSkillsToEdges(skills)
 
-    const [openModal, setOpenModal] = useState(false);
-
-
     return (
         <ReactFlowProvider>
             <LayoutFlow
@@ -178,30 +174,6 @@ export default function SkilltreeFlow({skills}) {
                 // onSkillHandler
             >
             </LayoutFlow>
-
-            <Button onClick={() => setOpenModal(true)}>Test modal</Button>
-            <Modal show={openModal} onClose={() => setOpenModal(false)} dismissible size="4xl">
-                <Modal.Header>HTML & CSS</Modal.Header>
-
-                <Modal.Body>
-                    <div className="space-y-6">
-                        <h2 className={"text-xl text-gray-800"}>Omschrijving</h2>
-                        <p className="text-base leading-relaxed text-gray-500">
-                            In dit overzicht vind je de skilltree voor je huidige opleiding. Dit is een tool waarin de
-                            voortgang van je semester in bijgehouden kan worden. In het overzicht vind je een
-                            totaalbeeld van de mogelijke vaardigheden die je in dit semester kunt leren. De skilltree
-                            doorloop je vanaf boven naar bedenden. Om een vaardigheid af te tekenen, moet je voldoende
-                            bewijs aanleveren. Klik op een vaardigheid voor meer informatie.
-                        </p>
-                    </div>
-                </Modal.Body>
-
-                <Modal.Footer>
-                    <Button color="gray" onClick={() => setOpenModal(false)}>
-                        Sluiten
-                    </Button>
-                </Modal.Footer>
-            </Modal>
         </ReactFlowProvider>
     );
 }
