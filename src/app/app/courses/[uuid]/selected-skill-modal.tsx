@@ -21,7 +21,7 @@ export default function SelectedSkillModal({ skill }) {
 
     return (
         <>
-            <Modal show={skill} onClose={() => closeSkillModal()} dismissible size="4xl">
+            <Modal show={skill} onClose={() => closeSkillModal()} dismissible size="6xl" className={'top-center'}>
                 {skill && <>
                     <Modal.Header>{skill.title}</Modal.Header>
 
