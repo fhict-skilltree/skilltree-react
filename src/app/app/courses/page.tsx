@@ -1,25 +1,17 @@
 import {getUserEnrolledCourses} from "@/api/repositories/course-repository";
-import {Button, Card} from "flowbite-react";
+import CourseCards from "@/app/app/courses/course-cards";
 
 export default async function Page({}) {
     const courses = await getUserEnrolledCourses()
 
     return (
         <div className={'container mx-auto'}>
+            <div className={'mt-4'}>
+                <h1 className="text-3xl font-bold tracking-tight text-gray-900 dark:text-white">Cursussen</h1>
+            </div>
+
             <div className={'grid gap-4 md:grid-cols-2'}>
-                {courses.map((course) =>
-                    <Card href={`/app/courses/${course.uuid}`} key={course.uuid} className={'mt-5'}>
-                        <h5 className="text-2xl font-bold tracking-tight text-gray-900 dark:text-white">
-                            { course.title }
-                        </h5>
-
-                        <p className="font-normal text-gray-700 dark:text-gray-400">
-                            { course.excerpt }
-                        </p>
-
-                        <Button href={`/app/courses/${course.uuid}`} key={course.uuid}>Naar cursus gaan</Button>
-                    </Card>
-                )}
+                <CourseCards courses={courses}/>
             </div>
         </div>
     )

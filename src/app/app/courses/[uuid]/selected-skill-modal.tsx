@@ -21,16 +21,24 @@ export default function SelectedSkillModal({ skill }) {
 
     return (
         <>
-            <Modal show={skill} onClose={() => closeSkillModal()} dismissible size="6xl" className={'top-center'}>
+            <Modal show={skill} onClose={() => closeSkillModal()} dismissible size="6xl" position={'top-center'} className={'max-h-full'}>
                 {skill && <>
                     <Modal.Header>{skill.title}</Modal.Header>
 
                     <Modal.Body>
                         <div className="space-y-6">
-                            <h2 className={"text-xl text-gray-800"}>Omschrijving</h2>
-                            <p className="text-base leading-relaxed text-gray-500">
-                                {skill.body}
-                            </p>
+                            <div className="grid gap-4 grid-cols-12">
+                                <div className={'col-span-8'}>
+                                    <h2 className={"text-xl text-gray-800"}>Omschrijving</h2>
+                                    <p className="text-base leading-relaxed text-gray-500">
+                                        {skill.body}
+                                    </p>
+                                </div>
+
+                                <div className={'col-span-4'}>
+
+                                </div>
+                            </div>
                         </div>
                     </Modal.Body>
 
